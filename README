@@ -1,0 +1,32 @@
+# 🐾 Cats vs. Dogs Image Classifier
+**An End-to-End Computer Vision Project using Transfer Learning**
+
+## 🚀 Project Overview
+This project identifies whether an image contains a cat or a dog. Using **Transfer Learning** with a pre-trained **MobileNetV2** model, I achieved high accuracy with minimal training time.
+
+### 📊 Key Results
+* **Test Accuracy:** 98.62%
+* **Model Architecture:** MobileNetV2 (Base) + Global Average Pooling + Dropout (0.2)
+* **Optimization:** Adam Optimizer with Binary Crossentropy loss.
+
+## 🛠️ Technical Stack
+* **Language:** Python
+* **Environment:** Google Colab (GPU Accelerated)
+* **Libraries:** TensorFlow, Keras, Matplotlib, NumPy
+* **Data Source:** Kaggle Cats and Dogs Dataset (10,000 images)
+
+## 🏗️ Data Engineering & Science Workflow
+1. **Automated Ingestion:** Leveraged the Kaggle API to stream data directly into a cloud environment.
+2. **Preprocessing:** Implemented `ImageDataGenerator` for real-time data augmentation (rotation, zoom, horizontal flips) to prevent overfitting.
+3. **Model Architecture:**
+   - Frozen MobileNetV2 base to leverage ImageNet weights.
+   - Custom Dense head for binary classification.
+4. **Serialization:** Exported the final "brain" in the modern `.keras` native format for secure deployment.
+
+## 🖼️ Sample Prediction
+| Input Image | Model Prediction | Confidence |
+| :--- | :--- | :--- |
+| ![Cat Sample](https://raw.githubusercontent.com/Mrhangetsu6514/Data_projects/main/path_to_your_screenshot.png) | **CAT** | **98.62%** |
+
+---
+*Developed as part of my Data Engineering portfolio, 2026.*
