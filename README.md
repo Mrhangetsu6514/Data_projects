@@ -1,42 +1,45 @@
 # 🧪 Data Science Case Study: Cat vs. Dog Image Classification
 
-This project implements a Binary Image Classifier using Deep Learning. It serves as a study on Convolutional Neural Networks (CNNs), focusing on how spatial feature extraction and data augmentation can overcome high variance in unstructured image data.
+This project implements a Binary Image Classifier using Deep Learning and Transfer Learning. It serves as a study on leveraging pre-trained architectures (MobileNetV2) to achieve high-accuracy results on unstructured image data with minimal training time.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1a1fLks9yCOr4De19AUHwIMSrj4FpdTjK?usp=sharing)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](PASTE_YOUR_COLAB_URL_HERE)
 
-## 🎯 The Research Goal
-The objective was to develop a predictive model that identifies patterns (ears, snout shapes, fur textures) to distinguish between two species with a target accuracy of >80% using a custom-built CNN.
+## 🎯 Project Objective
+The goal was to build a model capable of distinguishing between cats and dogs with an acceptable accuracy of **>98%**. The project explores the impact of **Data Augmentation** and **Global Average Pooling** on preventing overfitting in small-to-medium datasets.
 
-## 🔬 Methodology & Experimentation
+## 🔬 Methodology & Pipeline
 
-### 1. Exploratory Data Analysis (EDA)
-Before modeling, the data was inspected for:
-* **Class Balance:** Ensuring an equal number of cat and dog images to avoid model bias.
-* **Dimensions:** Analyzing various aspect ratios to determine the optimal resize target (e.g., 150x150).
+### 1. Data Ingestion & EDA
+* **Source:** Kaggle `tongpython/cat-and-dog` dataset.
+* **Exploration:** Random sampling was used to visualize the dataset, ensuring proper class labeling (Cat vs. Dog) before processing.
 
-### 2. Feature Engineering & Preprocessing
-* **Pixel Rescaling:** All pixel values were normalized from $[0, 255]$ to $[0, 1]$ to improve the efficiency of backpropagation.
-* **Data Augmentation:** To simulate a larger dataset and improve generalization, I applied random transformations:
-    * Horizontal Flips
-    * Rotation Range (40°)
-    * Shear/Zoom ranges
+### 2. Preprocessing & Augmentation
+To improve model generalization, the following spatial transformations were applied to the training set:
+* **Normalization:** Pixel scaling to `1./255`.
+* **Augmentation:** Random rotations (40°), width/height shifts, shearing, and zooming.
+* **Validation Setup:** Validation data remained "clean" (rescaled only) to ensure an unbiased performance check.
 
-### 3. Model Architecture
-I designed a Sequential CNN with the following logic:
-* **Convolutional Layers:** 3 layers with increasing filters (32, 64, 128) to capture increasingly complex features.
-* **Activation:** `ReLU` for hidden layers to prevent vanishing gradients, and `Sigmoid` for the final output (Binary Classification).
-* **Regularization:** `Dropout(0.5)` was added before the Dense layer to mitigate overfitting.
+### 3. Model Architecture (Transfer Learning)
+Instead of building from scratch, this project uses a **Transfer Learning** strategy:
+* **Base Model:** `MobileNetV2` (pre-trained on ImageNet).
+* **Frozen Weights:** The base expert layers were frozen to retain specialized feature extraction capabilities.
+* **Head:** A custom head consisting of `GlobalAveragePooling2D`, a `Dropout(0.2)` layer for regularization, and a final `Sigmoid` neuron for binary classification.
+
+### 4. Training & Results
+* **Optimizer:** Adam
+* **Loss Function:** Binary Cross-Entropy
+* **Checkpoint:** The model successfully tracks Training vs. Validation accuracy/loss to monitor convergence.
 
 
+## 📊 Final Performance Check
+The model provides a prediction interface that outputs the probability of the species:
+* **Dog Threshold:** `prediction > 0.5`
+* **Cat Threshold:** `prediction <= 0.5`
+* **Target Accuracy:** High-confidence results (>99% goal).
 
-## 📊 Performance Evaluation
-The model's success was measured using:
-* **Binary Cross-Entropy Loss:** To measure the distance between predicted probabilities and actual labels.
-* **Accuracy/Loss Curves:** Visualizing the training vs. validation delta to identify the "Sweet Spot" before overfitting occurred.
-
-## 📂 Project Structure
+## 📁 Project Structure
 ```text
-├── data/               # Dataset links and samples
-├── notebooks/          # Colab file with step-by-step EDA and Training
-├── models/             # Saved .h5 or .keras model files
-└── results/            # Accuracy plots and Confusion Matrix
+├── notebooks/          # Cats_vs_Dogs_practice.ipynb
+├── src/                # cats_vs_dogs_practice.py (Main Pipeline)
+├── models/             # my_cat_dog_model.keras (Trained Weights)
+└── README.md           # Project Documentation
