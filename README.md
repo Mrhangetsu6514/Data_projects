@@ -1,28 +1,42 @@
-# 🐾 Cats vs. Dogs: Computer Vision Pipeline
+# 🧪 Data Science Case Study: Cat vs. Dog Image Classification
 
-A deep learning project focused on Binary Image Classification. This pipeline demonstrates the process of image preprocessing, CNN architecture design, and performance validation.
+This project implements a Binary Image Classifier using Deep Learning. It serves as a study on Convolutional Neural Networks (CNNs), focusing on how spatial feature extraction and data augmentation can overcome high variance in unstructured image data.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1a1fLks9yCOr4De19AUHwIMSrj4FpdTjK?usp=sharing)
 
----
+## 🎯 The Research Goal
+The objective was to develop a predictive model that identifies patterns (ears, snout shapes, fur textures) to distinguish between two species with a target accuracy of >80% using a custom-built CNN.
 
-## 🚀 Overview
-The objective is to build a robust model capable of distinguishing between images of cats and dogs using Convolutional Neural Networks (CNN).
+## 🔬 Methodology & Experimentation
 
-## 🛠️ Tech Stack
-* **Framework:** TensorFlow / Keras
-* **Image Processing:** OpenCV / PIL
-* **Environment:** Google Colab (GPU Accelerated)
+### 1. Exploratory Data Analysis (EDA)
+Before modeling, the data was inspected for:
+* **Class Balance:** Ensuring an equal number of cat and dog images to avoid model bias.
+* **Dimensions:** Analyzing various aspect ratios to determine the optimal resize target (e.g., 150x150).
 
-## 🧠 Technical Features
-* **Data Augmentation:** Used `ImageDataGenerator` to prevent overfitting.
-* **CNN Architecture:** Implemented Conv2D, MaxPool2D, and Dropout layers.
-* **Normalization:** Rescaled pixel values to [0-1] for better convergence.
+### 2. Feature Engineering & Preprocessing
+* **Pixel Rescaling:** All pixel values were normalized from $[0, 255]$ to $[0, 1]$ to improve the efficiency of backpropagation.
+* **Data Augmentation:** To simulate a larger dataset and improve generalization, I applied random transformations:
+    * Horizontal Flips
+    * Rotation Range (40°)
+    * Shear/Zoom ranges
 
-## 📁 Dataset Structure
+### 3. Model Architecture
+I designed a Sequential CNN with the following logic:
+* **Convolutional Layers:** 3 layers with increasing filters (32, 64, 128) to capture increasingly complex features.
+* **Activation:** `ReLU` for hidden layers to prevent vanishing gradients, and `Sigmoid` for the final output (Binary Classification).
+* **Regularization:** `Dropout(0.5)` was added before the Dense layer to mitigate overfitting.
+
+
+
+## 📊 Performance Evaluation
+The model's success was measured using:
+* **Binary Cross-Entropy Loss:** To measure the distance between predicted probabilities and actual labels.
+* **Accuracy/Loss Curves:** Visualizing the training vs. validation delta to identify the "Sweet Spot" before overfitting occurred.
+
+## 📂 Project Structure
 ```text
-dataset/
-├── training_set/
-│   ├── cats/
-│   └── dogs/
-└── test_set/
+├── data/               # Dataset links and samples
+├── notebooks/          # Colab file with step-by-step EDA and Training
+├── models/             # Saved .h5 or .keras model files
+└── results/            # Accuracy plots and Confusion Matrix
