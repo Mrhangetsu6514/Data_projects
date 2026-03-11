@@ -9,7 +9,7 @@
 This project identifies **38 different classes** of healthy and diseased plant leaves across multiple species. By leveraging **Transfer Learning** and **Fine-Tuning** on the MobileNetV2 architecture, the model achieves state-of-the-art diagnostic accuracy.
 
 ### 🖼️ Result Example
-![Model Prediction Result](image_c59017.png)  
+![Model Prediction Result]()  
 *Figure 1: The model correctly identifies Tomato Yellow Leaf Curl Virus with **99.79% confidence**.*
 
 ---
