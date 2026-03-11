@@ -1,4 +1,4 @@
-# 🌿 PlantVillage Disease Classifier
+<img width="450" height="432" alt="Tomato_yellow_leaf_curls_virus 99 79%" src="https://github.com/user-attachments/assets/268719fd-3407-4451-b726-4f577fb91220" /># 🌿 PlantVillage Disease Classifier
 > **A High-Performance Deep Learning System for Botanical Health Diagnosis**
 
 [![Accuracy](https://img.shields.io/badge/Accuracy-99.40%25-brightgreen)](#)
@@ -8,8 +8,10 @@
 ## 📊 Overview
 This project identifies **38 different classes** of healthy and diseased plant leaves across multiple species. By leveraging **Transfer Learning** and **Fine-Tuning** on the MobileNetV2 architecture, the model achieves state-of-the-art diagnostic accuracy.
 
+
 ### 🖼️ Result Example
-![Model Prediction Result]()  
+![Model Prediction Result]<img width="450" height="432" alt="Tomato_yellow_leaf_curls_virus 99 79%" src="https://github.com/user-attachments/assets/4a2eb1d2-5cfb-46c1-a6ae-af6a9f7e873e" />
+()  
 *Figure 1: The model correctly identifies Tomato Yellow Leaf Curl Virus with **99.79% confidence**.*
 
 ---
