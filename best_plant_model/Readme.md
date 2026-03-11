@@ -1,66 +1,50 @@
-This README is designed to highlight your technical decision-making and the impressive results you achieved. It frames the project as a professional engineering solution rather than just a school assignment, which is perfect for your portfolio.
+# 🌿 PlantVillage Disease Classifier
+> **A High-Performance Deep Learning System for Botanical Health Diagnosis**
+
+[![Accuracy](https://img.shields.io/badge/Accuracy-99.40%25-brightgreen)](#)
+[![Confidence](https://img.shields.io/badge/Inference_Confidence-99.79%25-blue)](#)
+[![Framework](https://img.shields.io/badge/Framework-TensorFlow_2.x-orange)](#)
+
+## 📊 Overview
+This project identifies **38 different classes** of healthy and diseased plant leaves across multiple species. By leveraging **Transfer Learning** and **Fine-Tuning** on the MobileNetV2 architecture, the model achieves state-of-the-art diagnostic accuracy.
+
+### 🖼️ Result Example
+![Model Prediction Result](image_c59017.png)  
+*Figure 1: The model correctly identifies Tomato Yellow Leaf Curl Virus with **99.79% confidence**.*
 
 ---
 
-# 🌿 PlantVillage Disease Classifier (99.7% Accuracy)
+## 🛠️ Technical Implementation
 
-A high-performance deep learning system built to identify **38 different classes** of healthy and diseased plant leaves across multiple species. This project utilizes **Transfer Learning** and **Fine-Tuning** on the MobileNetV2 architecture to achieve state-of-the-art results.
-
-## 🚀 Key Results
-
-* **Inference Confidence:** 99.79% on unseen test data.
-* **Validation Accuracy:** 99.40%.
-* **Model Size:** Optimized to ~26.8 MB for efficient deployment.
-* **Dataset:** Processed 2.7 GB of augmented image data.
-
----
-
-## 🛠️ Technical Stack & Workflow
-
-### 1. Data Engineering & Optimization
-
-* **Library:** TensorFlow / Keras.
-* **RAM Management:** Implemented an optimized data pipeline using `tf.data.AUTOTUNE` and lowered batch sizes to 16 to handle high-resolution image training within Google Colab’s memory limits.
-* **Preprocessing:** Standardized input images to $224 \times 224$ pixels and utilized specialized scaling to match pre-trained weights.
+### 1. Data Pipeline & Optimization
+* **Large-Scale Handling**: Processed over 2.7 GB of image data using a RAM-efficient pipeline.
+* **Performance Tuning**: Utilized `tf.data.AUTOTUNE` and adjusted batch sizes to 16 to prevent memory crashes in Google Colab.
+* **Preprocessing**: Implemented specialized scaling ($[-1, 1]$ range) to match the expectations of pre-trained MobileNetV2 weights.
 
 ### 2. Model Architecture
+| Layer Type | Purpose |
+| :--- | :--- |
+| **MobileNetV2 (Base)** | Pre-trained feature extraction (ImageNet weights). |
+| **GlobalAvgPooling** | Spatial data reduction. |
+| **Dropout (0.2)** | Overfitting prevention during training. |
+| **Dense (38)** | Softmax classification for 38 plant categories. |
 
-The model uses **MobileNetV2** as a base, selected for its balance between high accuracy and low computational cost, making it ideal for future mobile applications.
-
-* **Frozen Phase:** Initial training on a custom classification head (GlobalAveragePooling, Dropout, and Dense layers) while freezing the base expert weights.
-* **Fine-Tuning Phase:** Unfroze the base model and re-trained with a **very low learning rate ($1 \times 10^{-5}$)** to refine the deep layers for specific plant pathologies.
-
-### 3. Training Guardrails
-
-* **EarlyStopping:** Configured to monitor validation loss and stop training automatically if performance plateaued, preventing overfitting.
-* **Model Checkpointing:** Automatically saved only the "best" version of the model weight at each epoch.
-
----
-
-## 📁 Repository Structure
-
-* `/models`: Contains the final `.keras` model and the optimized `.tflite` version for mobile.
-* `/scripts`: Notebook logic including the inference engine used for real-time predictions.
-* `/examples`: High-confidence classification results and training logs.
+### 3. Training Strategy
+The project employed a **Two-Phase training approach**:
+1. **Phase 1 (Transfer Learning)**: Trained the custom head while keeping the base model frozen.
+2. **Phase 2 (Fine-Tuning)**: Unfroze the base model and re-trained with a very low learning rate ($1 \times 10^{-5}$) to achieve 99%+ accuracy.
 
 ---
 
-## 🔬 How to Use (Inference)
-
-The project includes a diagnostic script that pre-processes raw images and returns a disease classification with a confidence score.
-
-```python
-# Example Usage
-img_path = "path/to/leaf_image.jpg"
-prediction, confidence = predict_plant_disease(img_path)
-print(f"Result: {prediction} ({confidence}%)")
-
-```
+## 📈 Performance Summary
+* **Validation Accuracy:** 99.40%
+* **Training Time:** ~20.72 minutes (Phase 1)
+* **Model Size:** ~26.8 MB (Optimized `.keras` format)
 
 ---
 
-## 🇮🇱 Project Context
+## 🚀 How to Run
+To use the diagnostic script, ensure you have the required libraries installed:
 
-Developed by the founder of **Matzati Casa** to explore the intersection of automated image recognition and property value assessment (e.g., garden health monitoring).
-
-**Would you like me to help you create a specific "How to Reproduce" section that lists the exact libraries and versions (requirements.txt) for this repo?**
+```bash
+pip install tensorflow numpy matplotlib
