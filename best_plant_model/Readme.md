@@ -10,11 +10,12 @@ This project identifies **38 different classes** of healthy and diseased plant l
 
 
 ### 🖼️ Result Example
+*Figure 1: The model correctly identifies Tomato Yellow Leaf Curl Virus with **99.79% confidence**.*
 ![Model Prediction Result]<img width="450" height="432" alt="Tomato_yellow_leaf_curls_virus 99 79%" src="https://github.com/user-attachments/assets/4a2eb1d2-5cfb-46c1-a6ae-af6a9f7e873e" />
 ()  
 
 
-*Figure 1: The model correctly identifies Tomato Yellow Leaf Curl Virus with **99.79% confidence**.*
+
 
 ---
 
