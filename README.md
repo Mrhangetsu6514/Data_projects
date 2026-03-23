@@ -27,7 +27,6 @@ Welcome to my central data repository. This space showcases my ability to bridge
 
 | Domain | Tools & Technologies |
 | :--- | :--- |
-| **Data Engineering** | Docker, PostgreSQL, ETL Pipelines, n8n, Apache Airflow |
 | **Machine Learning** | TensorFlow, Keras, Scikit-Learn, Image Classification |
 | **Languages** | Python (Advanced), SQL, PowerShell, Bash |
 | **DevOps** | Infrastructure-as-Code, Version Control (Git), Linux Containers |
